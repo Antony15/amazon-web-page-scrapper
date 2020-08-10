@@ -2,6 +2,7 @@ package logger
 
 import (
 	"flag"
+	"go/build"
 	"log"
 	"os"
 )
@@ -12,7 +13,7 @@ var (
 
 func init() {
 	// set location of log file
-	var logpath = "/default.log"
+	var logpath = build.Default.GOPATH + "/default.log"
 	flag.Parse()
 	var file, err1 = os.OpenFile(logpath, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	if err1 != nil {

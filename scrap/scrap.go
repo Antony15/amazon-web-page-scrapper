@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/gorilla/mux"
 
@@ -23,8 +24,9 @@ type scrap struct {
 }
 
 type scrapped struct {
-	Url     string  `json:"url"`
-	Product product `json:"product"`
+	Url      string  `json:"url"`
+	Product  product `json:"product"`
+	Datetime string  `json:"datetime"`
 }
 
 type product struct {
@@ -89,6 +91,7 @@ func scrapurl(w http.ResponseWriter, r *http.Request) {
 			utils.FormatPrice(&scrapped.Product.Price)
 		})
 		c.Visit(scrapped.Url)
+		scrapped.Datetime = time.Now().Format("2006-01-02 15:04:05")
 		jsonStr, err := json.Marshal(scrapped)
 		checkErr(err)
 		req, err := http.NewRequest("POST", "http://localhost:9999/writedocument", bytes.NewBuffer(jsonStr))
@@ -120,6 +123,7 @@ func writedocument(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(ResponseArray)
 		return
 	} else {
+		request.Datetime = time.Now().Format("2006-01-02 15:04:05")
 		if err := save(request); err != nil {
 			ResponseArray["message"] = "Request Failed to write to document"
 			w.WriteHeader(http.StatusInternalServerError)
@@ -137,7 +141,7 @@ func writedocument(w http.ResponseWriter, r *http.Request) {
 func save(scrapped scrapped) error {
 	_, err := collection().Upsert(
 		bson.M{"url": scrapped.Url},
-		bson.M{"$set": bson.M{"product": scrapped.Product}},
+		bson.M{"$set": bson.M{"product": scrapped.Product, "datetime": scrapped.Datetime}},
 	)
 	return err
 }
