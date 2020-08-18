@@ -1,4 +1,4 @@
-# sellerapp-go-test
+# amazon-web-page-scrapper
 
 REST API in Go to scrap the given amazon web page
 
