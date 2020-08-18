@@ -39,21 +39,21 @@ type product struct {
 }
 
 func init() {
-	session, err := mgo.Dial("localhost/sellerapp_golang_mongodb")
+	session, err := mgo.Dial("localhost/amazon-web-page-scrapper")
 	if err != nil {
 		logger.Log.Println("Error : ", err.Error())
 	}
 
-	db = session.DB("sellerapp_golang_mongodb")
+	db = session.DB("amazon-web-page-scrapper")
 }
 
 func home(w http.ResponseWriter, r *http.Request) {
 	html := `<html>
 		<head>
-			<title>SellerApp Golang Test</title>
+			<title>amazon-web-page-scrapper</title>
 		</head>
 		<body>
-			<h1>SellerApp Golang Test</h1>
+			<h1>amazon-web-page-scrapper</h1>
 		</body>
 	</html>`
 	w.Write([]byte(html))
