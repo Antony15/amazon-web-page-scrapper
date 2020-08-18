@@ -1,6 +1,6 @@
 package main
 
-import "github.com/Antony15/sellerapp-go-test/scrap"
+import "github.com/Antony15/amazon-web-page-scrapper/scrap"
 
 // main Function
 func main() {
