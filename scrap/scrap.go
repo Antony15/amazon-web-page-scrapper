@@ -12,8 +12,8 @@ import (
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 
-	"github.com/Antony15/sellerapp-go-test/logger"
-	"github.com/Antony15/sellerapp-go-test/utils"
+	"github.com/Antony15/amazon-web-page-scrapper/logger"
+	"github.com/Antony15/amazon-web-page-scrapper/utils"
 	"github.com/gocolly/colly"
 )
 
