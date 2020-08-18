@@ -1,4 +1,4 @@
-module github.com/Antony15/sellerapp-go-test
+module github.com/Antony15/amazon-web-page-scrapper
 
 go 1.14
 
